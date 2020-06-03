@@ -1,0 +1,56 @@
+<div class="container p-4">
+  <div class="row">
+    <div class="col-md-4 mx-auto">
+      <div class="card">
+        <div class="card-header text-center">
+          <h3>Ingresar al Sistema</h3>
+        </div>
+        <div>
+          <div *ngIf="noExisteUsuario" class="alert alert-danger" role="alert">
+            <div>{{mensajeError}}</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div>
+            <form
+              [formGroup]="formularioLogin"
+              novalidate>
+              <div class="row">
+                <div class="form-group col-sm-12 col-md-12">
+                  <label for="cedula">CEDULA: </label>
+                  <input
+                    [formControlName]="'cedula'"
+                    [textMask]="mascaraCedula"
+                    type="text"
+                    class="form-control"
+                    id="cedula"
+                    aria-describedby="'cedulaHelp"
+                    placeholder="Ingrese su cedula">
+                  <small id="cedulaHelp" class="form-text text-musted">Ingrese su cedula.</small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-12 col-md-12">
+                  <label for="password">PASSWORD: </label>
+                  <input [formControlName]="'password'"
+                         type="password"
+                         class="form-control"
+                         id="password"
+                         aria-describedby="'passwordHelp"
+                         placeholder="Ingrese su password">
+                  <small id="passwordHelp" class="form-text text-musted">Ingrese su password.</small>
+                </div>
+              </div>
+              <div class="row">
+                <button class="btn btn-sm btn-primary btn-block"
+                        (click)="obtnerTokenDeUsuarioLogeado()"
+                        [disabled]="!credencialesAcceso"
+                >INGRESAR</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

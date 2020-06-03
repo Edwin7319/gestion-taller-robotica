@@ -1,0 +1,59 @@
+<div class="container">
+  <form
+    [formGroup]="formularioEstudiante"
+    (ngSubmit)="enviarFormularioEstudiante()"
+    novalidate
+  >
+    <div class="row">
+      <div class="form-group col-sm-12 col-md-12">
+        <label for="nombre">Nombre: *</label>
+        <input
+          [formControlName]="'nombre'"
+          type="text"
+          class="form-control"
+          id="nombre"
+          aria-describedby="nombreHelp"
+          placeholder="Ingrese la nombre">
+        <small id="nombreHelp" class="form-text text-musted">Ingrese una nombre para el taller.</small>
+        <div *ngIf="arregloMensajesDeErrorNombre.length>0 && arregloMensajesDeErrorNombre[0]"
+             class="alert alert-danger" role="alert">
+          <div *ngFor="let mensajeError of arregloMensajesDeErrorNombre">
+            <div>{{mensajeError}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm-12 col-md-12">
+        <label for="apellido">Apellido: *</label>
+        <input
+          [formControlName]="'apellido'"
+          type="text"
+          class="form-control"
+          id="apellido"
+          aria-describedby="apellidoHelp"
+          placeholder="Ingrese la apellido">
+        <small id="apellidoHelp" class="form-text text-musted">Ingrese una apellido para el taller.</small>
+        <div *ngIf="arregloMensajesDeErrorApellido.length>0 && arregloMensajesDeErrorApellido[0]"
+             class="alert alert-danger" role="alert">
+          <div *ngFor="let mensajeError of arregloMensajesDeErrorApellido">
+            <div>{{mensajeError}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8">
+        <input
+          type="date"
+          class="form-control"
+          [formControlName]="'fechaNacimiento'"
+          id="fechaNacimiento"
+          placeholder="Seleccione una fecha"
+          aria-describedby="horarioFechaIniciaAyuda"
+        >
+        <small id="fechaNacimientoHelp" class="form-text text-musted">Seleccione la fecha de nacimiento.</small>
+      </div>
+    </div>
+  </form>
+</div>

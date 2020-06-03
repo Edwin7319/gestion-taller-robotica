@@ -1,0 +1,77 @@
+<div class="container-fluid">
+  <form [formGroup]="filtroFecha"
+        (ngSubmit)="enviarParametros()"
+        novalidate
+  >
+    <div class="row">
+      <div class="col-md-4">
+        <select class="form-control"
+                [formControlName]="'etapa'"
+                [name]="'etapa'"
+        >
+          <option value="Explorar">Explorar</option>
+          <option value="Crear">Crear</option>
+          <option value="Compartir">Compartir</option>
+        </select>
+        <small id="etapaHelp" class="form-text text-musted">Seleccione la etapa de taller.</small>
+        <div *ngIf="arregloMensajesDeErrorEtapa.length>0 && arregloMensajesDeErrorEtapa[0]"
+             class="alert alert-danger" role="alert">
+          <div *ngFor="let mensajeError of arregloMensajesDeErrorEtapa">
+            <div>{{mensajeError}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <input
+          type="date"
+          class="form-control"
+          [formControlName]="'fechaTaller'"
+          id="fechaTaller"
+          placeholder="Seleccione una fecha"
+          aria-describedby="fechaTallerAyuda"
+        >
+        <small id="fechaTallerHelp" class="form-text text-musted">Seleccione la fecha de taller.</small>
+        <div *ngIf="arregloMensajesDeErrorFechaTaller.length>0 && arregloMensajesDeErrorFechaTaller[0]"
+             class="alert alert-danger" role="alert">
+          <div *ngFor="let mensajeError of arregloMensajesDeErrorFechaTaller">
+            <div>{{mensajeError}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <input type="time"
+               class="form-control"
+               id="horaInicio"
+               [formControlName]="'horaInicio'"
+               placeholder="Hora de inicio"
+               aria-describedby="horaInicioAyuda"
+        >
+        <small id="horaInicioAyuda" class="form-text text-muted">Hora de inicio.</small>
+        <div *ngIf="arregloMensajesDeErrorHoraInicio.length>0 && arregloMensajesDeErrorHoraInicio[0]"
+             class="alert alert-danger" role="alert">
+          <div *ngFor="let mensajeError of arregloMensajesDeErrorHoraInicio">
+            <div>{{mensajeError}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <input type="time"
+               class="form-control"
+               id="horaFin"
+               [formControlName]="'horaFin'"
+               placeholder="Hora de finalizacion"
+               aria-describedby="horaFinAyuda"
+        >
+        <small id="horaFinAyuda" class="form-text text-muted">Hora de finalizacion.</small>
+        <div *ngIf="arregloMensajesDeErrorHoraFin.length>0 && arregloMensajesDeErrorHoraFin[0]"
+             class="alert alert-danger" role="alert">
+          <div *ngFor="let mensajeError of arregloMensajesDeErrorHoraFin">
+            <div>{{mensajeError}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

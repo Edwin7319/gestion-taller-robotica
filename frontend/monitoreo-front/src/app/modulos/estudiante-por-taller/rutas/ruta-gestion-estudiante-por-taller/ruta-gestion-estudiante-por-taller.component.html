@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <h4>GESTION DE ESTUDIANTES POR TALLER</h4>
+  </div>
+  <div class="row justify-content-between">
+    <div class="col-sm-4 col-md-4">
+      <!--      <input type="text" class="form-control" placeholder="Buscar por nombre...."-->
+      <!--             name="filtrar-columna" [(ngModel)]="nombreABuscar">-->
+      <!--      <button class="btn btn-sm btn-outline-secondary btn-block" (click)="filtrarPorNombre()"><i-->
+      <!--        class="pi pi-search"></i> BUSCAR-->
+      <!--      </button>-->
+    </div>
+    <div class="col-sm-4 col-md-5">
+      <button class="btn btn-sm btn-info btn-block" (click)="abrirModalAgregar()"><i
+        class="pi pi-plus"></i> AGREGAR ALUMNO
+      </button>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container">
+  <p-table
+    [value]="estudiantes"
+    [paginator]="true"
+    [rows]="5"
+    [lazy]="true"
+    (onLazyLoad)="cargarMasDatos($event)"
+    [totalRecords]="registrosTotales"
+    [responsive]="true"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let col of columnas" id="cabeceraTabla">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td *ngFor="let col of columnas">
+          <div *ngIf="col.header === 'Nombre'">
+            {{rowData[col.field].nombre}}
+          </div>
+          <div *ngIf="col.header === 'Apellido'">
+            {{rowData[col.field].apellido}}
+          </div>
+          <div *ngIf="col.header === 'Estado'">
+            {{rowData[col.field].habilitado}}
+          </div>
+          <div *ngIf="col.field === 'id'">
+            <div class="row">
+              <div class="col-md-12 col-sm-12 filaBotones">
+                <button (click)="irAModuloHijo(rowData, 'imagen-por-estudiante')"
+                        class="btn btn-sm btn-info btn-block"><i
+                  class="pi pi-pencil"></i>
+                  Tomar fotografia
+                </button>
+              </div>
+              <div class="col-md-12 col-sm-12 filaBotones">
+                <button (click)="eliminarEstudiantePorTaller(rowData)"
+                        class="btn btn-sm btn-outline-danger btn-block"><i
+                  class="pi pi-pencil"></i>
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="columnas.length">
+          No hay registros
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

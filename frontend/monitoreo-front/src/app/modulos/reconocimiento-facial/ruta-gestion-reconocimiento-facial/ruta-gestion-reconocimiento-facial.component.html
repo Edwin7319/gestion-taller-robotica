@@ -1,0 +1,36 @@
+
+<div class="webcam">
+  <div>
+    <webcam [height]="500"
+            [width]="500"
+            [trigger]="triggerObservable"
+            (imageCapture)="handleImage($event)"
+            *ngIf="showWebcam"
+            [allowCameraSwitch]="allowCameraSwitch"
+            [switchCamera]="nextWebcamObservable"
+            [videoOptions]="videoOptions"
+            (cameraSwitched)="cameraWasSwitched($event)"
+            (initError)="handleInitError($event)"
+    ></webcam>
+    <br/>
+    <button class="btn btn-sm btn-warning" (click)="triggerSnapshotFoto()" style="margin-right: 50px">TOMAR FOTOGRAFIA</button>
+    <button class="btn btn-sm btn-warning" (click)="triggerSnapshot()">INICIAR MONITOREO</button>
+  </div>
+</div>
+
+
+<!--<div class="progress">-->
+<!--  <div class="progress-bar progress-bar-striped bgsuccess" role="progressbar"-->
+<!--  [style.width]="()">-->
+
+<!--  </div>-->
+<!--</div>-->
+
+<h4 *ngIf="errors.length > 0">Messages:</h4>
+<ul *ngFor="let error of errors">
+  <li>{{error | json}}</li>
+</ul>
+
+
+
+

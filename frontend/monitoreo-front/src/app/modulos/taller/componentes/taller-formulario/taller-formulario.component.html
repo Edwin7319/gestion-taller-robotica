@@ -1,0 +1,27 @@
+<div class="container">
+    <form
+      [formGroup]="formularioTaller"
+      (ngSubmit)="enviarFormularioTaller()"
+      novalidate
+    >
+      <div class="row">
+        <div class="form-group col-sm-12 col-md-12">
+          <label for="descripcion">Descripcion: *</label>
+          <input
+            [formControlName]="'descripcion'"
+            type="text"
+            class="form-control"
+            id="descripcion"
+            aria-describedby="descripcionHelp"
+            placeholder="Ingrese la descripcion">
+          <small id="descripcionHelp" class="form-text text-musted">Ingrese una descripcion para el taller.</small>
+          <div *ngIf="arregloMensajesDeErrorDescripcion.length>0 && arregloMensajesDeErrorDescripcion[0]"
+               class="alert alert-danger" role="alert">
+            <div *ngFor="let mensajeError of arregloMensajesDeErrorDescripcion">
+              <div>{{mensajeError}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+</div>

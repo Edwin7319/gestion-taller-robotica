@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <h4>HISTORIAL DE TALLER: {{nombreTaller}}</h4>
+  </div>
+  <div class="row">
+    <app-filtro-busqueda-fecha
+      (parametrosSeleccionados)="parametrosSeleccionados($event)"
+      [parametrosDeBusqueda]="busquedaSeleccionada"
+    ></app-filtro-busqueda-fecha>
+  </div>
+  <div>
+    <button
+      class="btn btn-sm btn-info"
+      (click)="buscarEmocionesPorFecha()"
+      [disabled]="!filtroValido"
+    >
+      BUSCAR
+    </button>
+  </div>
+  <div class="row">
+    <div style="width: 80%; margin-left: 100px">
+      <canvas
+        baseChart
+        [chartType]="'line'"
+        [colors]="myColors"
+        [datasets]="chartData"
+        [labels]="chartLabels"
+        [options]="chartOptions"
+        [legend]="true"
+        (chartClick)="onChartClick($event)">
+      </canvas>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="card-columns">
+      <div *ngFor="let imagen of imagenesTaller; index as i">
+        <div class="card">
+          <img src="{{imagen.urls}}" alt="imagenes" class="card-img-top">
+          <div class="card-body">
+            <p>Hora: {{imagen.hora}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

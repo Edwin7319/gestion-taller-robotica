@@ -1,0 +1,20 @@
+<h3>TOMAR FOTOGRAFIA ESTUDIANTE</h3>
+<app-ruta-gestion-reconocimiento-facial
+(linkImagen)="escucharLinkImagen($event)"
+>
+</app-ruta-gestion-reconocimiento-facial>
+
+<div class="row justify-content-lg-end" mat-dialog-actions>
+  <div style="padding-right: 1rem">
+    <button
+      class="btn btn-outline-dark"
+      (click)="cancelarModal()">
+      <i class="pi pi-times"></i>CANCELAR
+    </button>
+  </div>
+  <div>
+    <button class="btn btn-success" [disabled]="!linkImagen" (click)="enviarDatosFormulario()"><i
+      class="pi pi-save"></i> ACEPTAR
+    </button>
+  </div>
+</div>

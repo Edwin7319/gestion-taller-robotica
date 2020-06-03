@@ -1,0 +1,136 @@
+<div class="container">
+  <form
+    [formGroup]="formularioUsuario"
+    (ngSubmit)="enviarFormularioEstudiante()"
+    novalidate
+  >
+    <div class="row">
+      <div class="form-group col-sm-12 col-md-12">
+        <label for="nombre">Nombre: *</label>
+        <input
+          [formControlName]="'nombre'"
+          type="text"
+          class="form-control"
+          id="nombre"
+          aria-describedby="nombreHelp"
+          placeholder="Ingrese la nombre">
+        <small id="nombreHelp" class="form-text text-musted">Ingrese una nombre para el taller.</small>
+        <div *ngIf="arregloMensajesDeErrorNombre.length>0 && arregloMensajesDeErrorNombre[0]"
+             class="alert alert-danger" role="alert">
+          <div *ngFor="let mensajeError of arregloMensajesDeErrorNombre">
+            <div>{{mensajeError}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm-12 col-md-12">
+        <label for="apellido">Apellido: *</label>
+        <input
+          [formControlName]="'apellido'"
+          type="text"
+          class="form-control"
+          id="apellido"
+          aria-describedby="apellidoHelp"
+          placeholder="Ingrese la apellido">
+        <small id="apellidoHelp" class="form-text text-musted">Ingrese una apellido para el taller.</small>
+        <div *ngIf="arregloMensajesDeErrorApellido.length>0 && arregloMensajesDeErrorApellido[0]"
+             class="alert alert-danger" role="alert">
+          <div *ngFor="let mensajeError of arregloMensajesDeErrorApellido">
+            <div>{{mensajeError}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm-12 col-md-12">
+        <label for="cedula">Cedula: *</label>
+        <input
+          [formControlName]="'cedula'"
+          type="text"
+          class="form-control"
+          id="cedula"
+          aria-describedby="cedulaHelp"
+          placeholder="Ingrese la cedula">
+        <small id="cedulaHelp" class="form-text text-musted">Ingrese una cedula para el taller.</small>
+        <div *ngIf="arregloMensajesDeErrorCedula.length>0 && arregloMensajesDeErrorCedula[0]"
+             class="alert alert-danger" role="alert">
+          <div *ngFor="let mensajeError of arregloMensajesDeErrorCedula">
+            <div>{{mensajeError}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm-12 col-md-12">
+        <label for="correo">Correo: *</label>
+        <input
+          [formControlName]="'correo'"
+          type="text"
+          class="form-control"
+          id="correo"
+          aria-describedby="correoHelp"
+          placeholder="Ingrese la correo">
+        <small id="correoHelp" class="form-text text-musted">Ingrese una correo para el taller.</small>
+        <div *ngIf="arregloMensajesDeErrorCorreo.length>0 && arregloMensajesDeErrorCorreo[0]"
+             class="alert alert-danger" role="alert">
+          <div *ngFor="let mensajeError of arregloMensajesDeErrorCorreo">
+            <div>{{mensajeError}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" [hidden]="estaEditando">
+      <div class="form-group col-sm-12 col-md-12">
+        <label for="password">Password: *</label>
+        <input
+          [formControlName]="'password'"
+          type="password"
+          class="form-control"
+          id="password"
+          aria-describedby="passwordHelp"
+          placeholder="Ingrese la password">
+        <small id="passwordHelp" class="form-text text-musted">Ingrese una password para el taller.</small>
+        <div *ngIf="arregloMensajesDeErrorPassword.length>0 && arregloMensajesDeErrorPassword[0]"
+             class="alert alert-danger" role="alert">
+          <div *ngFor="let mensajeError of arregloMensajesDeErrorPassword">
+            <div>{{mensajeError}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm-12 col-md-12">
+        <label for="rol">Rol: *</label>
+        <mat-select [formControlName]="'rol'"
+                    id="rol"
+                    placeholder="Roles"
+                    multiple>
+          <mat-option *ngFor="let rol of roles" [value]="rol">
+            {{rol.tipo}}
+          </mat-option>
+        </mat-select>
+        <small id="rolHelp" class="form-text text-musted">Seleccione al menos un rol.</small>
+        <div *ngIf="arregloMensajesDeErrorRol.length>0 && arregloMensajesDeErrorRol[0] "
+             class="alert alert-danger" role="alert">
+          <div *ngFor="let mensajeError of arregloMensajesDeErrorRol">
+            <div>{{mensajeError}}</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

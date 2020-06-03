@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    {{_datos ? 'EDITAR' : 'CREAR'}} TALLER
+  </div>
+</div>
+
+<div mat-dialog-content>
+  <app-taller-formulario
+    [taller]="tallerCrearEditar"
+    (datosTaller)="crearEditarTaller($event)"
+  >
+  </app-taller-formulario>
+</div>
+
+<div class="row justify-content-lg-end" mat-dialog-actions>
+  <div style="padding-right: 1rem">
+    <button
+      class="btn btn-outline-dark"
+      (click)="cancelarModal()">
+      <i class="pi pi-times"></i>CANCELAR
+    </button>
+  </div>
+  <div>
+    <button class="btn btn-success" [disabled]="!tallerCrearEditar" (click)="enviarDatosFormulario()"><i
+      class="pi pi-save"></i> ACEPTAR
+    </button>
+  </div>
+</div>

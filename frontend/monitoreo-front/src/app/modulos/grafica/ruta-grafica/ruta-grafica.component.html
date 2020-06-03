@@ -1,0 +1,182 @@
+<div class="container">
+  <div class="row justify-content-center">
+      <h2>MONITOREO DE EMOCIONES</h2>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 mx-auto">
+      <div *ngIf="nombreSala1">
+        <h2>{{nombreSala1.mensaje}}</h2>
+      </div>
+
+      <label for="nombreSala">Nombre de la sala: </label>
+      <input id="nombreSala" type="text" [(ngModel)]="nombreSala" name="nombreSala">
+      <button
+        class="btn btn-sm btn-info btn-block"
+        (click)="unirmeASalaMonitoreo()"
+        [disabled]="!websocketService.conectado"
+      >Escuchar sala
+      </button>
+      <button
+        (click)="dejarSala()"
+        class="btn btn-sm btn-warning btn-block">
+        Dejar sala
+      </button>
+    </div>
+    <div class="col-md-5">
+      <p-dropdown
+        [options]="estados"
+        [(ngModel)]="estadoSeleccionado"
+        placeholder="Seleccione un estado"
+        optionLabel="name"
+        [showClear]="true"
+      ></p-dropdown>
+      <p>Estado actual: {{estadoSeleccionado ? estadoSeleccionado.name : 'Ninguno'}}</p>
+    </div>
+  </div>
+
+  <div class="row fila-emociones" style="padding-top: 20px">
+    <div class="col-md-3">
+      <p-card header="ALUMNO 1" [style]="{width: '250px'}">
+        <h6><i>Ira:</i> {{arregloEmocionesAlumno1[0]}}</h6>
+        <h6><i>Deprecion:</i> {{arregloEmocionesAlumno1[1]}}</h6>
+        <h6><i>Disgusto:</i> {{arregloEmocionesAlumno1[2]}}</h6>
+        <h6><i>Temor:</i> {{arregloEmocionesAlumno1[3]}}</h6>
+        <h6><i>Felicidad:</i> {{arregloEmocionesAlumno1[4]}}</h6>
+        <h6><i>Neutral:</i> {{arregloEmocionesAlumno1[5]}}</h6>
+        <h6><i>Triztesa:</i> {{arregloEmocionesAlumno1[6]}}</h6>
+        <h6><i>Sorpresa:</i> {{arregloEmocionesAlumno1[7]}}</h6>
+      </p-card>
+    </div>
+    <div class="col-md-3">
+      <p-card header="ALUMNO 2" [style]="{width: '250px'}">
+        <h6><i>Ira:</i> {{arregloEmocionesAlumno2[0]}}</h6>
+        <h6><i>Deprecion:</i> {{arregloEmocionesAlumno2[1]}}</h6>
+        <h6><i>Disgusto:</i> {{arregloEmocionesAlumno2[2]}}</h6>
+        <h6><i>Temor:</i> {{arregloEmocionesAlumno2[3]}}</h6>
+        <h6><i>Felicidad:</i> {{arregloEmocionesAlumno2[4]}}</h6>
+        <h6><i>Neutral:</i> {{arregloEmocionesAlumno2[5]}}</h6>
+        <h6><i>Triztesa:</i> {{arregloEmocionesAlumno2[6]}}</h6>
+        <h6><i>Sorpresa:</i> {{arregloEmocionesAlumno2[7]}}</h6>
+      </p-card>
+    </div>
+    <div class="col-md-3">
+      <p-card header="ALUMNO 3" [style]="{width: '250px'}">
+        <h6><i>Ira:</i> {{arregloEmocionesAlumno3[0]}}</h6>
+        <h6><i>Deprecion:</i> {{arregloEmocionesAlumno3[1]}}</h6>
+        <h6><i>Disgusto:</i> {{arregloEmocionesAlumno3[2]}}</h6>
+        <h6><i>Temor:</i> {{arregloEmocionesAlumno3[3]}}</h6>
+        <h6><i>Felicidad:</i> {{arregloEmocionesAlumno3[4]}}</h6>
+        <h6><i>Neutral:</i> {{arregloEmocionesAlumno3[5]}}</h6>
+        <h6><i>Triztesa:</i> {{arregloEmocionesAlumno3[6]}}</h6>
+        <h6><i>Sorpresa:</i> {{arregloEmocionesAlumno3[7]}}</h6>
+      </p-card>
+    </div>
+    <div class="col-md-3">
+      <p-card header="ALUMNO 4" [style]="{width: '250px'}">
+        <h6><i>Ira:</i> {{arregloEmocionesAlumno4[0]}}</h6>
+        <h6><i>Deprecion:</i> {{arregloEmocionesAlumno4[1]}}</h6>
+        <h6><i>Disgusto:</i> {{arregloEmocionesAlumno4[2]}}</h6>
+        <h6><i>Temor:</i> {{arregloEmocionesAlumno4[3]}}</h6>
+        <h6><i>Felicidad:</i> {{arregloEmocionesAlumno4[4]}}</h6>
+        <h6><i>Neutral:</i> {{arregloEmocionesAlumno4[5]}}</h6>
+        <h6><i>Triztesa:</i> {{arregloEmocionesAlumno4[6]}}</h6>
+        <h6><i>Sorpresa:</i> {{arregloEmocionesAlumno4[7]}}</h6>
+      </p-card>
+    </div>
+  </div>
+</div>
+
+<div style="padding-top: 30px">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header class="disable_ripple">
+        <mat-panel-title>
+          <b>GRAFICAS</b>
+        </mat-panel-title>
+        <mat-panel-description>
+          Graficas de las emociones de los ninios
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-tab-group>
+        <mat-tab label="Alumno 1">
+          <div style="width: 75%;">
+            <canvas
+              baseChart
+              [chartType]="'line'"
+              [colors]="myColors"
+              [datasets]="chartData"
+              [labels]="chartLabels"
+              [options]="chartOptions"
+              [legend]="true"
+              (chartClick)="onChartClick($event)">
+            </canvas>
+          </div>
+        </mat-tab>
+        <mat-tab label="Alumno 2">
+          <div style="width: 75%;">
+            <canvas
+              baseChart
+              [chartType]="'line'"
+              [colors]="myColors"
+              [datasets]="chartData1"
+              [labels]="chartLabels"
+              [options]="chartOptions"
+              [legend]="true"
+              (chartClick)="onChartClick($event)">
+            </canvas>
+          </div>
+        </mat-tab>
+        <mat-tab label="Alumno 3">
+          <div style="width: 75%;">
+            <canvas
+              baseChart
+              [chartType]="'line'"
+              [colors]="myColors"
+              [datasets]="chartData2"
+              [labels]="chartLabels"
+              [options]="chartOptions"
+              [legend]="true"
+              (chartClick)="onChartClick($event)">
+            </canvas>
+          </div>
+        </mat-tab>
+        <mat-tab label="Alumno 4">
+          <div style="width: 75%;">
+            <canvas
+              baseChart
+              [chartType]="'line'"
+              [colors]="myColors"
+              [datasets]="chartData3"
+              [labels]="chartLabels"
+              [options]="chartOptions"
+              [legend]="true"
+              (chartClick)="onChartClick($event)">
+            </canvas>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header class="disable_ripple">
+        <mat-panel-title>
+          <b>CAMARA</b>
+        </mat-panel-title>
+        <mat-panel-description>
+          Estado de la camara
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-ruta-gestion-reconocimiento-facial
+        (linkImagen)="recuperarLinkImagen($event)"
+        (datosObtenidos)="obtnerDatosUsuario($event)"
+      >
+      </app-ruta-gestion-reconocimiento-facial>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<div>
+  <h5>{{algo | json}}</h5>
+</div>
